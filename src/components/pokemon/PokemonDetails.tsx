@@ -20,6 +20,7 @@ export default class PokemonDetails extends React.Component<PokemonDetailsProps,
     openDialog (pokemon: Pokemon) {
         this.dialogRef.current?.showModal();
         this.setState({ pokemon });
+        this.dialogRef.current?.scrollTo(0, 0);
     };
 
     private closeDialog = () => {
