@@ -1,4 +1,4 @@
-import './PokeemonRange.css';
+import './PokemonRange.css';
 
 export default function PokemonRange({ pageSize: end, setPageSize: setEnd }: { pageSize: number, setPageSize: React.Dispatch<React.SetStateAction<number>> }) {
 
