@@ -3,17 +3,22 @@ import { Pokemon, type PokemonAbility, type PokemonStat, type PokemonType } from
 
 export default class PokemonService {
 
-    static async loadPokemons( page: number, pageSize: number ): Promise<Pokemon[]> {
+    static async loadPokemons(page: number, pageSize: number): Promise<Pokemon[]> {
         const startId = (page - 1) * pageSize + 1;
         const endId = page * pageSize;
 
         const promises = [];
 
         for (let i = startId; i <= endId; i++) {
+            console.log(`Loading Pokemon ID: ${Constants.MAX_POKEMON_ID}`);
+            if (i >= Constants.MAX_POKEMON_ID) break;
             promises.push(this.getPokemon(i));
         }
 
-        return await Promise.all(promises)
+        const results = await Promise.allSettled(promises);
+        return results
+            .filter(result => result.status === 'fulfilled')
+            .map(result => (result as PromiseFulfilledResult<Pokemon>).value);
     }
 
     private static async getPokemon(id: number): Promise<Pokemon> {
