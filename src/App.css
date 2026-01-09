@@ -1,7 +1,17 @@
-.app-title{
+.app-title {
     text-align: center;
-    margin-top: 20px;
+    margin-top: 30px;
     margin-bottom: 20px;
+    font-size: 3rem;
+    font-weight: bold;
+    background: linear-gradient(135deg, #dc2626, #991b1b, #7f1d1d);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+    filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.2));
+    letter-spacing: 2px;
+    text-transform: uppercase;
 }
 
 menu{

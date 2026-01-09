@@ -12,7 +12,7 @@ function App() {
     
     return (
         <>
-            <h1 className='app-title'>Pokemon List</h1>
+            <h1 className='app-title'>PokeDex</h1>
             <menu>
                 <PokemonRange pageSize={pageSize} setPageSize={setPageSize} />
                 <PokemonPage page={page} setPage={setPage} />
