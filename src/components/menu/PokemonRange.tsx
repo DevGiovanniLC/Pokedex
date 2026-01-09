@@ -1,3 +1,4 @@
+import './PokeemonRange.css';
 
 export default function PokemonRange({ pageSize: end, setPageSize: setEnd }: { pageSize: number, setPageSize: React.Dispatch<React.SetStateAction<number>> }) {
 
@@ -10,7 +11,7 @@ export default function PokemonRange({ pageSize: end, setPageSize: setEnd }: { p
 
     return (
         <>
-        <div>
+        <div className="pokemon-range">
             <label>Page size: </label>
             <input type="number"  value={end} onChange={handleEndChange} min={2} max={151}/>
         </div>
