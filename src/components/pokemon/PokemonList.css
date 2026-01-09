@@ -1,8 +1,8 @@
 .pokemon-list-container {
     display: flex;
     justify-content: center;
-    background: linear-gradient(135deg, #460000 0%, #ff5d5d 100%);
-    min-height: 100vh;
+    background: linear-gradient(135deg, #460000 0%, #d60808 100%);
+    min-height: 70vh;
     width: 100%;
     padding: 20px 0;
 }
