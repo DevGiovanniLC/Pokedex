@@ -1,4 +1,3 @@
-import React from "react";
 import './PokemonCard.css';
 import type { Pokemon } from "../../models/Pokemon";
 
@@ -7,22 +6,11 @@ export interface PokemonCardProps {
     onClick?: () => void;
 }
 
-export class PokemonCard extends React.Component<PokemonCardProps> {
-    private pokemon: Pokemon
-    
-    constructor(props: PokemonCardProps) {
-        super(props);
-        this.pokemon = props.pokemon;
-    }
-
-    render() {
-        return (
-            <>
-            <div className="pokemon-card" onClick={this.props.onClick}>
-                <h2><span>#{this.pokemon.id}</span> {this.pokemon.name}</h2>
-                <img src={this.pokemon.spriteUrl} alt={this.pokemon.name} />
-            </div>
-            </>
-        )
-    }
+export function PokemonCard({ pokemon, onClick }: PokemonCardProps) {
+    return (
+        <div className="pokemon-card" onClick={onClick}>
+            <h2><span>#{pokemon.id}</span> {pokemon.name}</h2>
+            <img src={pokemon.spriteUrl} alt={pokemon.name} />
+        </div>
+    );
 }
