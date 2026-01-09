@@ -1,5 +1,5 @@
 import React from "react";
-import type Pokemon from "./models/Pokemon";
+import type Pokemon from "../../models/Pokemon";
 import './PokemonCard.css';
 
 export interface PokemonCardProps {

@@ -1,0 +1,16 @@
+.page-menu{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.page-button{
+    padding: 5px 10px;
+    font-size: 16px;
+    background-color: #4e3939;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+

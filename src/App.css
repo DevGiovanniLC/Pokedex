@@ -1,0 +1,11 @@
+.app-title{
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+menu{
+    display: flex;
+    gap: 25px;
+    margin-bottom: 25px;
+}

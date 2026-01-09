@@ -1,21 +1,23 @@
 
 import './App.css'
 import { useState } from 'react';
-import PokemonList from './Pokemon/PokemonList'
-import PokemonRange from './menu/PokemonRange';
-import PokemonPage from './menu/PokemonPage';
+import PokemonList from './components/pokemon/PokemonList'
+import PokemonRange from './components/menu/PokemonRange';
+import PokemonPage from './components/menu/PokemonPage';
 
 
 function App() {
-    const [pageSize, setPageSize] = useState(151);
+    const [pageSize, setPageSize] = useState(10);
     const [page, setPage] = useState(1);
     
     return (
         <>
-            <h1>Pokemon List</h1>
+            <h1 className='app-title'>Pokemon List</h1>
             
-            <PokemonRange pageSize={pageSize} setPageSize={setPageSize} />
-            <PokemonPage page={page} setPage={setPage} />
+            <menu>
+                <PokemonRange pageSize={pageSize} setPageSize={setPageSize} />
+                <PokemonPage page={page} setPage={setPage} />
+            </menu>
             <PokemonList page={page} pageSize={pageSize} />
         </>
     )

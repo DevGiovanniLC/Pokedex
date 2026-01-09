@@ -2,7 +2,7 @@
 import React from "react";
 import './PokemonList.css';
 import { PokemonCard } from "./PokemonCard";
-import Pokemon from "./models/Pokemon";
+import Pokemon from "../../models/Pokemon";
 
 interface PokemonListState {
     pokemonNames: Pokemon[];
