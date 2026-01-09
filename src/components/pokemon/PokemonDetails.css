@@ -1,0 +1,239 @@
+dialog {
+    color: white;
+    padding: 0;
+    border-radius: 20px;
+    border: none;
+    width: 800px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+/* Custom scrollbar styles */
+dialog::-webkit-scrollbar {
+    width: 8px;
+}
+
+dialog::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}
+
+dialog::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 10px;
+}
+
+dialog::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.5);
+}
+
+/* Firefox scrollbar */
+dialog {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0.3) rgba(0, 0, 0, 0.1);
+}
+
+/* Dialog backgrounds by type */
+dialog.dialog-fire { background: linear-gradient(135deg, #dc2626, #991b1b); }
+dialog.dialog-water { background: linear-gradient(135deg, #1e40af, #1e3a8a); }
+dialog.dialog-grass { background: linear-gradient(135deg, #15803d, #14532d); }
+dialog.dialog-electric { background: linear-gradient(135deg, #d97706, #b45309); }
+dialog.dialog-psychic { background: linear-gradient(135deg, #be185d, #9f1239); }
+dialog.dialog-ice { background: linear-gradient(135deg, #2563eb, #1e40af); }
+dialog.dialog-dragon { background: linear-gradient(135deg, #6366f1, #4f46e5); }
+dialog.dialog-dark { background: linear-gradient(135deg, #374151, #1f2937); }
+dialog.dialog-fairy { background: linear-gradient(135deg, #db2777, #be185d); }
+dialog.dialog-normal { background: linear-gradient(135deg, #6b7280, #4b5563); }
+dialog.dialog-fighting { background: linear-gradient(135deg, #b91c1c, #7f1d1d); }
+dialog.dialog-flying { background: linear-gradient(135deg, #7c3aed, #6366f1); }
+dialog.dialog-poison { background: linear-gradient(135deg, #7e22ce, #6b21a8); }
+dialog.dialog-ground { background: linear-gradient(135deg, #b45309, #78350f); }
+dialog.dialog-rock { background: linear-gradient(135deg, #57534e, #44403c); }
+dialog.dialog-bug { background: linear-gradient(135deg, #65a30d, #4d7c0f); }
+dialog.dialog-ghost { background: linear-gradient(135deg, #5b21b6, #4c1d95); }
+dialog.dialog-steel { background: linear-gradient(135deg, #64748b, #475569); }
+
+dialog::backdrop {
+    background-color: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(8px);
+}
+
+.pokemon-details-content {
+    padding: 2rem;
+}
+
+.close-button:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: rotate(90deg);
+}
+
+.pokemon-header {
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+.pokemon-header h2 {
+    margin: 0;
+    font-size: 2.5rem;
+    text-transform: capitalize;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.pokemon-id {
+    font-size: 1.2rem;
+    opacity: 0.8;
+    font-weight: bold;
+}
+
+.pokemon-images {
+    text-align: center;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.official-artwork {
+    max-width: 250px;
+    height: auto;
+    filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.3));
+}
+
+.pokemon-types {
+    display: flex;
+    gap: 0.5rem;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+}
+
+.type-badge {
+    padding: 0.5rem 1.5rem;
+    border-radius: 20px;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    background: rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(10px);
+}
+
+.pokemon-info {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.info-row {
+    display: flex;
+    justify-content: space-around;
+    gap: 1rem;
+}
+
+.info-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1;
+}
+
+.info-label {
+    font-size: 0.85rem;
+    opacity: 0.8;
+    margin-bottom: 0.3rem;
+}
+
+.info-value {
+    font-size: 1.3rem;
+    font-weight: bold;
+}
+
+.pokemon-abilities {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.pokemon-abilities h3,
+.pokemon-stats h3 {
+    margin-top: 0;
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+    text-align: center;
+}
+
+.abilities-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    justify-content: center;
+}
+
+.ability-badge {
+    padding: 0.4rem 1rem;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 15px;
+    font-size: 0.9rem;
+    text-transform: capitalize;
+}
+
+.pokemon-stats {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    padding: 1rem;
+}
+
+.stat-row {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 0.8rem;
+}
+
+.stat-name {
+    min-width: 120px;
+    text-transform: capitalize;
+    font-size: 0.9rem;
+}
+
+.stat-bar-container {
+    flex: 1;
+    height: 20px;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.stat-bar {
+    height: 100%;
+    background: linear-gradient(90deg, #4ade80, #22c55e);
+    border-radius: 10px;
+    transition: width 0.3s ease;
+}
+
+.stat-value {
+    min-width: 40px;
+    text-align: right;
+    font-weight: bold;
+}
+
+/* Tipo-specific colors */
+.type-fire { background: linear-gradient(135deg, #f59e0b, #dc2626) !important; }
+.type-water { background: linear-gradient(135deg, #3b82f6, #1e40af) !important; }
+.type-grass { background: linear-gradient(135deg, #22c55e, #15803d) !important; }
+.type-electric { background: linear-gradient(135deg, #fbbf24, #f59e0b) !important; }
+.type-psychic { background: linear-gradient(135deg, #ec4899, #be185d) !important; }
+.type-ice { background: linear-gradient(135deg, #60a5fa, #3b82f6) !important; }
+.type-dragon { background: linear-gradient(135deg, #8b5cf6, #6366f1) !important; }
+.type-dark { background: linear-gradient(135deg, #6b7280, #374151) !important; }
+.type-fairy { background: linear-gradient(135deg, #f9a8d4, #ec4899) !important; }
+.type-normal { background: linear-gradient(135deg, #9ca3af, #6b7280) !important; }
+.type-fighting { background: linear-gradient(135deg, #dc2626, #991b1b) !important; }
+.type-flying { background: linear-gradient(135deg, #a78bfa, #8b5cf6) !important; }
+.type-poison { background: linear-gradient(135deg, #a855f7, #7e22ce) !important; }
+.type-ground { background: linear-gradient(135deg, #d97706, #92400e) !important; }
+.type-rock { background: linear-gradient(135deg, #78716c, #57534e) !important; }
+.type-bug { background: linear-gradient(135deg, #84cc16, #65a30d) !important; }
+.type-ghost { background: linear-gradient(135deg, #7c3aed, #5b21b6) !important; }
+.type-steel { background: linear-gradient(135deg, #94a3b8, #64748b) !important; }

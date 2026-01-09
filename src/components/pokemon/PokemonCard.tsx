@@ -1,9 +1,10 @@
 import React from "react";
-import type Pokemon from "../../models/Pokemon";
 import './PokemonCard.css';
+import type { Pokemon } from "../../models/Pokemon";
 
 export interface PokemonCardProps {
     pokemon: Pokemon;
+    onClick?: () => void;
 }
 
 export class PokemonCard extends React.Component<PokemonCardProps> {
@@ -17,7 +18,7 @@ export class PokemonCard extends React.Component<PokemonCardProps> {
     render() {
         return (
             <>
-            <div className="pokemon-card">
+            <div className="pokemon-card" onClick={this.props.onClick}>
                 <h2><span>#{this.pokemon.id}</span> {this.pokemon.name}</h2>
                 <img src={this.pokemon.spriteUrl} alt={this.pokemon.name} />
             </div>
