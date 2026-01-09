@@ -12,7 +12,10 @@ function App() {
     
     return (
         <>
+            <header>
+            <img src="/favicon.svg" alt="Pokeball icon" className="pokeball-icon" />
             <h1 className='app-title'>PokeDex</h1>
+            </header>
             <menu>
                 <PokemonRange pageSize={pageSize} setPageSize={setPageSize} />
                 <PokemonPage page={page} setPage={setPage} />
