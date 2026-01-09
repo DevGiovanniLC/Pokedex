@@ -4,11 +4,12 @@ import './App.css'
 import PokemonList from './components/pokemon/PokemonList'
 import PokemonRange from './components/menu/PokemonRange';
 import PokemonPage from './components/menu/PokemonPage';
+import Constants from './constants';
 
 
 function App() {
-    const [pageSize, setPageSize] = useState(10);
-    const [page, setPage] = useState(1);
+    const [pageSize, setPageSize] = useState(Constants.DEFAULT_POKEMON_PER_PAGE);
+    const [page, setPage] = useState(Constants.DEFAULT_POKEMON_PAGE);
     
     return (
         <>
