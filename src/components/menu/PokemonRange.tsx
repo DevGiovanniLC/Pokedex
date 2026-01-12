@@ -17,7 +17,7 @@ export default function PokemonRange({ pageSize: end, setPageSize: setEnd }: { p
 
     return (
         <div className="pokemon-range">
-            <label>Page size: </label>
+            <label>Tamaño de página: </label>
             <input type="number" value={end} onChange={handleEndChange} min={Constants.MIN_POKEMON_PER_PAGE} max={Constants.MAX_POKEMON_PER_PAGE} />
         </div>
     )
