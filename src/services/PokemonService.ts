@@ -2,8 +2,10 @@ import Constants from "../Constants";
 import type { Pokemon } from "../models/Pokemon";
 
 export default class PokemonService {
+    static cachedPokemons: Map<number, Pokemon> = new Map();
 
     static async loadPokemons(page: number, pageSize: number): Promise<Pokemon[]> {
+        this.cachedPokemons.clear();
         const startId = (page - 1) * pageSize + 1;
         const endId = page * pageSize;
 
@@ -22,8 +24,11 @@ export default class PokemonService {
     }
 
     static async getPokemon(id: number): Promise<Pokemon> {
+        if (this.cachedPokemons.has(id)) return this.cachedPokemons.get(id)!;
+
         const response = await fetch(`${Constants.API}/pokemon/${id}`);
         const data: Pokemon = await response.json();
+        this.cachedPokemons.set(id, data);
         return data;
     }
 }
