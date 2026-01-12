@@ -19,12 +19,12 @@ const PokemonDetails = forwardRef<PokemonDetailsHandle>((_, ref) => {
         }
     }));
 
-    const primaryType = pokemon?.types[0] || 'normal';
+    const primaryType = pokemon?.types[0]?.type.name || 'normal';
 
     return (
         <>
-            <dialog ref={dialogRef} closedby="any" className={`dialog-${primaryType}`}>
-                <div className="pokemon-details-content">
+            <dialog ref={dialogRef} closedby="any" className={`type-${primaryType}`}>
+                <div className={`pokemon-details-content`}>
 
                     <div className="pokemon-header">
                         <h2>{pokemon?.name}</h2>
@@ -32,12 +32,12 @@ const PokemonDetails = forwardRef<PokemonDetailsHandle>((_, ref) => {
                     </div>
 
                     <div className="pokemon-images">
-                        <img className="official-artwork" src={pokemon?.officialArtwork} alt={pokemon?.name} loading="lazy"/>
+                        <img className="official-artwork" src={pokemon?.sprites.other?.["official-artwork"]?.front_default ?? ''} alt={pokemon?.name} loading="lazy"/>
                     </div>
 
                     <div className="pokemon-types">
                         {pokemon?.types.map((type, index) => (
-                            <span key={index} className={`type-badge type-${type}`}>{type}</span>
+                            <span key={index} className={`type-badge type-${type.type.name}`}>{type.type.name}</span>
                         ))}
                     </div>
 
@@ -53,7 +53,7 @@ const PokemonDetails = forwardRef<PokemonDetailsHandle>((_, ref) => {
                             </div>
                             <div className="info-item">
                                 <span className="info-label">Experiencia Base</span>
-                                <span className="info-value">{pokemon?.baseExperience}</span>
+                                <span className="info-value">{pokemon?.base_experience}</span>
                             </div>
                         </div>
                     </div>
@@ -62,7 +62,7 @@ const PokemonDetails = forwardRef<PokemonDetailsHandle>((_, ref) => {
                         <h3>Habilidades</h3>
                         <div className="abilities-list">
                             {pokemon?.abilities.map((ability, index) => (
-                                <span key={index} className="ability-badge">{ability}</span>
+                                <span key={index} className="ability-badge">{ability.ability.name}</span>
                             ))}
                         </div>
                     </div>
@@ -71,14 +71,14 @@ const PokemonDetails = forwardRef<PokemonDetailsHandle>((_, ref) => {
                         <h3>Estadísticas</h3>
                         {pokemon?.stats.map((stat, index) => (
                             <div key={index} className="stat-row">
-                                <span className="stat-name">{stat.name}</span>
+                                <span className="stat-name">{stat.stat.name}</span>
                                 <div className="stat-bar-container">
                                     <div
                                         className="stat-bar"
-                                        style={{ width: `${(stat.value / 255) * 100}%` }}
+                                        style={{ width: `${(stat.base_stat / 255) * 100}%` }}
                                     ></div>
                                 </div>
-                                <span className="stat-value">{stat.value}</span>
+                                <span className="stat-value">{stat.base_stat}</span>
                             </div>
                         ))}
                     </div>

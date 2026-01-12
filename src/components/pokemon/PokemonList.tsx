@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import './PokemonList.css';
 import { PokemonCard } from "./PokemonCard";
 import PokemonDetails, { type PokemonDetailsHandle } from "./PokemonDetails";
-import { Pokemon } from "../../models/Pokemon";
+import type { Pokemon } from "../../models/Pokemon";
 import PokemonService from "../../services/PokemonService";
 
 interface PokemonListProps {
@@ -26,7 +26,7 @@ export default function PokemonList({ page, pageSize }: PokemonListProps) {
 
     return (
         <>
-            <PokemonDetails ref={detailsRef} pokemon={null} />
+            <PokemonDetails ref={detailsRef}/>
             <div className="pokemon-list-container">
                 <ul className="pokemon-list">
                     {pokemonNames.map((pokemon) => (
