@@ -1,5 +1,4 @@
 import { Route, Routes } from 'react-router'
-import './App.css'
 import Pokedex from './pages/Pokedex'
 import HomePage from './pages/HomePage'
 import DetailedPokemon from './pages/DetailedPokemon'
