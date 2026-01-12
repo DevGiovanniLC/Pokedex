@@ -1,18 +1,14 @@
 import { useState, useRef, useImperativeHandle, forwardRef } from "react";
-import './PokemonDetails.css';
 import type { Pokemon } from "../../models/Pokemon";
-
-interface PokemonDetailsProps {
-    pokemon: Pokemon | null;
-}
+import './PokemonDetails.css';
 
 export interface PokemonDetailsHandle {
     openDialog: (pokemon: Pokemon) => void;
 }
 
-const PokemonDetails = forwardRef<PokemonDetailsHandle, PokemonDetailsProps>((props, ref) => {
+const PokemonDetails = forwardRef<PokemonDetailsHandle>((_, ref) => {
 
-    const [pokemon, setPokemon] = useState<Pokemon | null>(props.pokemon);
+    const [pokemon, setPokemon] = useState<Pokemon | null>(null);
     const dialogRef = useRef<HTMLDialogElement>(null);
 
     useImperativeHandle(ref, () => ({
@@ -23,30 +19,11 @@ const PokemonDetails = forwardRef<PokemonDetailsHandle, PokemonDetailsProps>((pr
         }
     }));
 
-    const closeDialog = () => {
-        dialogRef.current?.close();
-    };
-
-    const handleDialogClick = (e: React.MouseEvent<HTMLDialogElement>) => {
-        const dialog = dialogRef.current;
-        if (dialog && e.target === dialog) {
-            const rect = dialog.getBoundingClientRect();
-            if (
-                e.clientX < rect.left ||
-                e.clientX > rect.right ||
-                e.clientY < rect.top ||
-                e.clientY > rect.bottom
-            ) {
-                closeDialog();
-            }
-        }
-    };
-
     const primaryType = pokemon?.types[0] || 'normal';
 
     return (
         <>
-            <dialog ref={dialogRef} onClick={handleDialogClick} className={`dialog-${primaryType}`}>
+            <dialog ref={dialogRef} closedby="any" className={`dialog-${primaryType}`}>
                 <div className="pokemon-details-content">
 
                     <div className="pokemon-header">
@@ -55,7 +32,7 @@ const PokemonDetails = forwardRef<PokemonDetailsHandle, PokemonDetailsProps>((pr
                     </div>
 
                     <div className="pokemon-images">
-                        <img className="official-artwork" src={pokemon?.officialArtwork} alt={pokemon?.name} />
+                        <img className="official-artwork" src={pokemon?.officialArtwork} alt={pokemon?.name} loading="lazy"/>
                     </div>
 
                     <div className="pokemon-types">
@@ -97,7 +74,7 @@ const PokemonDetails = forwardRef<PokemonDetailsHandle, PokemonDetailsProps>((pr
                                 <span className="stat-name">{stat.name}</span>
                                 <div className="stat-bar-container">
                                     <div
-                                        className="stat-bar"    
+                                        className="stat-bar"
                                         style={{ width: `${(stat.value / 255) * 100}%` }}
                                     ></div>
                                 </div>
