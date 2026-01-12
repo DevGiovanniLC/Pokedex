@@ -1,4 +1,4 @@
-import Constants from '../../constants';
+import Constants from '../../Constants';
 import './PokemonRange.css';
 
 export default function PokemonRange({ pageSize: end, setPageSize: setEnd }: { pageSize: number, setPageSize: React.Dispatch<React.SetStateAction<number>> }) {

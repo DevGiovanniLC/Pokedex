@@ -1,5 +1,5 @@
 
-import Constants from '../../constants';
+import Constants from '../../Constants';
 import './PokemonPage.css';
 
 export default function PokemonPage({ page, setPage }: { page: number, setPage: React.Dispatch<React.SetStateAction<number>> }) {
