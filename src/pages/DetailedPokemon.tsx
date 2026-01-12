@@ -1,4 +1,4 @@
-import { useParams } from "react-router"
+import { useParams, useNavigate, Link } from "react-router"
 import PokemonService from "../services/PokemonService"
 import type { Pokemon } from "../models/Pokemon";
 import { useState, useEffect } from "react";
@@ -7,6 +7,7 @@ import "./DetailedPokemon.css";
 
 export default function DetailedPokemon() {
     const { pokemonId } = useParams<{ pokemonId: string }>()
+    const navigate = useNavigate();
     const [pokemon, setPokemon] = useState<Pokemon | null>(null);
     const [error, setError] = useState<boolean>(false);
 
@@ -45,8 +46,33 @@ export default function DetailedPokemon() {
     const maxStat = 255;
     const primaryType = pokemon.types[0]?.type.name || 'normal';
 
+    const currentId = Number(pokemonId);
+    const hasPrevious = currentId > 1;
+    const hasNext = currentId < 1025;
+
     return (
         <div className={`pokemon-detail type-${primaryType}`}>
+            <div className="nav-header">
+                <button 
+                    className="nav-button previous-button" 
+                    onClick={() => navigate(`/pokedex/${currentId - 1}`)}
+                    disabled={!hasPrevious}
+                >
+                    ← Anterior
+                </button>
+
+                <Link to="/pokedex" className="nav-button back-to-pokedex">
+                    Volver al Pokedex
+                </Link>
+                
+                <button 
+                    className="nav-button next-button" 
+                    onClick={() => navigate(`/pokedex/${currentId + 1}`)}
+                    disabled={!hasNext}
+                >
+                    Siguiente →
+                </button>
+            </div>
             {/* Header con imagen y datos básicos */}
             <div className="pokemon-header">
                 <div className="pokemon-id">#{String(pokemon.id).padStart(4, '0')}</div>

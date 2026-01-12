@@ -7,6 +7,48 @@
     min-height: 100vh;
 }
 
+/* Navigation Header */
+.nav-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.nav-button {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 25px;
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+}
+
+.nav-button:hover:not(:disabled) {
+    background: rgba(255, 255, 255, 0.35);
+    transform: scale(1.05);
+}
+
+.nav-button:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+.previous-button:hover:not(:disabled) {
+    transform: translateX(-5px);
+}
+
+.next-button:hover:not(:disabled) {
+    transform: translateX(5px);
+}
+
 /* Backgrounds by type */
 .pokemon-detail.type-fire { background: linear-gradient(135deg, #dc2626, #991b1b); }
 .pokemon-detail.type-water { background: linear-gradient(135deg, #1e40af, #1e3a8a); }

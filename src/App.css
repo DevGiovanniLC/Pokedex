@@ -1,8 +1,8 @@
 header{
-    background-color: #55000094;
-    padding: 10px 0;
+    background-color: #c4000094;
+    padding: 8px 0;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    margin-bottom: 20px;
+    margin-bottom: 15px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -20,9 +20,9 @@ header{
     text-align: center;
     margin-top: 30px;
     margin-bottom: 20px;
-    font-size: 3.5rem;
+    font-size: 3rem;
     font-weight: 800;
-    background: linear-gradient(135deg, #ffffff, #dd9292, #ef4444);
+    background: linear-gradient(135deg, #ffffff, #f8ff2f, #ffdd00);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -44,5 +44,5 @@ header{
 menu{
     display: flex;
     gap: 25px;
-    margin-bottom: 25px;
+    margin-bottom: 15px;
 }
