@@ -49,3 +49,41 @@
     transform: scale(0.95);
 }
 
+/* Quitar flechas del input number */
+.page-menu input[type="number"]::-webkit-outer-spin-button,
+.page-menu input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.page-menu input[type="number"] {
+    -moz-appearance: textfield;
+    padding: 10px 15px;
+    font-size: 1rem;
+    font-weight: 600;
+    color: white;
+    background: rgba(255, 255, 255, 0.15);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 15px;
+    text-align: center;
+    min-width: 80px;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+}
+
+.page-menu input[type="number"]:focus {
+    outline: none;
+    background: rgba(255, 255, 255, 0.25);
+    border-color: rgba(255, 255, 255, 0.6);
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+}
+
+.page-menu input[type="number"]:hover {
+    background: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.5);
+}
+
+/* Placeholder */
+.page-menu input[type="number"]::placeholder {
+    color: rgba(255, 255, 255, 0.6);
+}
