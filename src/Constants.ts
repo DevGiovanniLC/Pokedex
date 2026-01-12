@@ -8,7 +8,7 @@ const Constants = {
     MAX_POKEMON_PAGE: 50,
 
     API: 'https://pokeapi.co/api/v2',
-    MAX_POKEMON_ID: await fetch('https://pokeapi.co/api/v2/pokemon').then(res => res.json()).then(data => data.count),
+    MAX_POKEMON_ID: await fetch('https://pokeapi.co/api/v2/pokemon').then(res => res.json()).then(data => data.count).catch(() => 1025),
 }
 
 export default Constants;
