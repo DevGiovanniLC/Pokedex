@@ -1,3 +1,4 @@
+import { useRef } from 'react';
 import Constants from '../../Constants';
 import './PokemonRange.css';
 
@@ -15,10 +16,16 @@ export default function PokemonRange({ pageSize: end, setPageSize: setEnd }: { p
         }
     };
 
+    const inputRangeRef = useRef<HTMLInputElement>(null);
+
+    const focus = () => {
+        inputRangeRef.current?.focus();
+    }
+
     return (
-        <div className="pokemon-range">
-            <label>Tamaño de página: </label>
-            <input type="number" value={end} onChange={handleEndChange} min={Constants.MIN_POKEMON_PER_PAGE} max={Constants.MAX_POKEMON_PER_PAGE} />
+        <div className="pokemon-range" onClick={focus}>
+            <label htmlFor="input-range">Tamaño de página: </label>
+            <input ref={inputRangeRef} id='input-range' type="number" value={end} onChange={handleEndChange} min={Constants.MIN_POKEMON_PER_PAGE} max={Constants.MAX_POKEMON_PER_PAGE} />
         </div>
     )
 }
