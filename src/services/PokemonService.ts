@@ -1,5 +1,5 @@
-import Constants from "../constants";
-import { Pokemon, type PokemonAbility, type PokemonStat, type PokemonType } from "../models/Pokemon";
+import Constants from "../Constants";
+import type { Pokemon } from "../models/Pokemon";
 
 export default class PokemonService {
 
@@ -21,20 +21,9 @@ export default class PokemonService {
             .map(result => (result as PromiseFulfilledResult<Pokemon>).value);
     }
 
-    private static async getPokemon(id: number): Promise<Pokemon> {
+    static async getPokemon(id: number): Promise<Pokemon> {
         const response = await fetch(`${Constants.API}/pokemon/${id}`);
-        const data = await response.json();
-        return new Pokemon(
-            id,
-            data.name,
-            data.sprites.front_default,
-            data.sprites.other['official-artwork'].front_default,
-            data.height,
-            data.weight,
-            data.types.map((t: PokemonType) => t.type.name),
-            data.stats.map((s: PokemonStat) => ({ name: s.stat.name, value: s.base_stat })),
-            data.abilities.filter((a: PokemonAbility) => !a.is_hidden).map((a: PokemonAbility) => a.ability.name),
-            data.base_experience
-        );
+        const data: Pokemon = await response.json();
+        return data;
     }
 }

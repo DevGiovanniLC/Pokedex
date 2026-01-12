@@ -2,18 +2,15 @@ import { Route, Routes } from 'react-router'
 import './App.css'
 import Pokedex from './pages/Pokedex'
 import HomePage from './pages/HomePage'
+import DetailedPokemon from './pages/DetailedPokemon'
 
-
-
-
-function App() {
+export default function App() {
     return (
         <Routes>
+            <Route path="/*" element={<><HomePage /></>} />
             <Route path="/" element={<><HomePage /></>} />
             <Route path="/pokedex" element={<><Pokedex /></>} />
+            <Route path="/pokedex/:pokemonId" element={<><DetailedPokemon /></>} />
         </Routes>
-
     )
 }
-
-export default App
