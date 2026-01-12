@@ -14,7 +14,7 @@ export default class PokemonService {
         for (let i = startId; i <= endId; i++) {
             console.log(`Loading Pokemon ID: ${Constants.MAX_POKEMON_ID}`);
             if (i >= Constants.MAX_POKEMON_ID) break;
-            promises.push(this.getPokemon(i));
+            promises.push(this.fetchPokemon(i));
         }
 
         const results = await Promise.allSettled(promises);
@@ -23,7 +23,7 @@ export default class PokemonService {
             .map(result => (result as PromiseFulfilledResult<Pokemon>).value);
     }
 
-    static async getPokemon(id: number): Promise<Pokemon> {
+    static async fetchPokemon(id: number): Promise<Pokemon> {
         if (this.cachedPokemons.has(id)) return this.cachedPokemons.get(id)!;
 
         const response = await fetch(`${Constants.API}/pokemon/${id}`);
