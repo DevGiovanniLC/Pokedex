@@ -1,13 +1,14 @@
 import { useState, useRef, useImperativeHandle, forwardRef } from "react";
 import type { Pokemon } from "../../models/Pokemon";
 import './PokemonDetails.css';
+import { useNavigate } from "react-router";
 
 export interface PokemonDetailsHandle {
     openDialog: (pokemon: Pokemon) => void;
 }
 
 const PokemonDetails = forwardRef<PokemonDetailsHandle>((_, ref) => {
-
+    const navigate = useNavigate();
     const [pokemon, setPokemon] = useState<Pokemon | null>(null);
     const dialogRef = useRef<HTMLDialogElement>(null);
 
@@ -25,7 +26,10 @@ const PokemonDetails = forwardRef<PokemonDetailsHandle>((_, ref) => {
         <>
             <dialog ref={dialogRef} closedby="any" className={`type-${primaryType}`}>
                 <div className={`pokemon-details-content`}>
-
+                    <div className="close-button-container">
+                        <button className="detail-button" onClick={() => navigate(`/pokedex/${pokemon?.id}`)}>🔍</button>
+                        <button className="close-button" onClick={() => dialogRef.current?.close()}>×</button>
+                    </div>
                     <div className="pokemon-header">
                         <h2>{pokemon?.name}</h2>
                         <span className="pokemon-id">#{pokemon?.id}</span>
@@ -56,31 +60,6 @@ const PokemonDetails = forwardRef<PokemonDetailsHandle>((_, ref) => {
                                 <span className="info-value">{pokemon?.base_experience}</span>
                             </div>
                         </div>
-                    </div>
-
-                    <div className="pokemon-abilities">
-                        <h3>Habilidades</h3>
-                        <div className="abilities-list">
-                            {pokemon?.abilities.map((ability, index) => (
-                                <span key={index} className="ability-badge">{ability.ability.name}</span>
-                            ))}
-                        </div>
-                    </div>
-
-                    <div className="pokemon-stats">
-                        <h3>Estadísticas</h3>
-                        {pokemon?.stats.map((stat, index) => (
-                            <div key={index} className="stat-row">
-                                <span className="stat-name">{stat.stat.name}</span>
-                                <div className="stat-bar-container">
-                                    <div
-                                        className="stat-bar"
-                                        style={{ width: `${(stat.base_stat / 255) * 100}%` }}
-                                    ></div>
-                                </div>
-                                <span className="stat-value">{stat.base_stat}</span>
-                            </div>
-                        ))}
                     </div>
                 </div>
             </dialog>
