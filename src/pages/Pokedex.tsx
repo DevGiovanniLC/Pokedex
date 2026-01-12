@@ -2,7 +2,7 @@ import { useState } from 'react';
 import PokemonList from '../components/pokemon/PokemonList'
 import PokemonRange from '../components/menu/PokemonRange';
 import PokemonPage from '../components/menu/PokemonPage';
-import Constants from '../constants';
+import Constants from '../Constants';
 
 export default function Pokedex() {
     const [pageSize, setPageSize] = useState(Constants.DEFAULT_POKEMON_PER_PAGE);
