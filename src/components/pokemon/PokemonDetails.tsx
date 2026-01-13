@@ -1,26 +1,26 @@
 import { useState, useRef, useImperativeHandle, forwardRef } from "react";
-import type { Pokemon } from "../../models/Pokemon";
+import type { PokemonPreview } from "../../models/Pokemon";
 import './PokemonDetails.css';
 import { useNavigate } from "react-router";
 
 export interface PokemonDetailsHandle {
-    openDialog: (pokemon: Pokemon) => void;
+    openDialog: (pokemon: PokemonPreview) => void;
 }
 
 const PokemonDetails = forwardRef<PokemonDetailsHandle>((_, ref) => {
     const navigate = useNavigate();
-    const [pokemon, setPokemon] = useState<Pokemon | null>(null);
+    const [pokemon, setPokemon] = useState<PokemonPreview | null>(null);
     const dialogRef = useRef<HTMLDialogElement>(null);
 
     useImperativeHandle(ref, () => ({
-        openDialog(pokemon: Pokemon) {
+        openDialog(pokemon: PokemonPreview) {
             dialogRef.current?.showModal();
             setPokemon(pokemon);
             dialogRef.current?.scrollTo(0, 0);
         }
     }));
 
-    const primaryType = pokemon?.types[0]?.type.name || 'normal';
+    const primaryType = pokemon?.type_primary || 'normal';
 
     return (
         <>
@@ -36,13 +36,14 @@ const PokemonDetails = forwardRef<PokemonDetailsHandle>((_, ref) => {
                     </div>
 
                     <div className="pokemon-images">
-                        <img className="official-artwork" src={pokemon?.sprites.other?.["official-artwork"]?.front_default ?? ''} alt={pokemon?.name} loading="lazy"/>
+                        <img className="official-artwork" src={pokemon?.sprite_artwork ?? ''} alt={pokemon?.name} loading="lazy" />
                     </div>
 
                     <div className="pokemon-types">
-                        {pokemon?.types.map((type, index) => (
-                            <span key={index} className={`type-badge type-${type.type.name}`}>{type.type.name}</span>
-                        ))}
+                        <span className={`type-badge type-${pokemon?.type_primary || 'normal'}`}>{pokemon?.type_primary || 'normal'}</span>
+                        {pokemon?.type_secondary && (
+                            <span className={`type-badge type-${pokemon.type_secondary}`}>{pokemon.type_secondary}</span>
+                        )}
                     </div>
 
                     <div className="pokemon-info">

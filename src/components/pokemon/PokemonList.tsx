@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import './PokemonList.css';
 import PokemonCard from "./PokemonCard";
 import PokemonDetails, { type PokemonDetailsHandle } from "./PokemonDetails";
-import type { Pokemon } from "../../models/Pokemon";
+import type { PokemonPreview } from "../../models/Pokemon";
 import PokemonService from "../../services/PokemonService";
 
 interface PokemonListProps {
@@ -11,16 +11,16 @@ interface PokemonListProps {
 }
 
 export default function PokemonList({ page, pageSize }: PokemonListProps) {
-    const [pokemonList, setPokemonList] = useState<Pokemon[]>([]);
+    const [pokemonList, setPokemonList] = useState<PokemonPreview[]>([]);
     const detailsRef = useRef<PokemonDetailsHandle>(null);
 
     useEffect(() => {
-        PokemonService.findPokemonList(page, pageSize).then(pokemons => {
+        PokemonService.getPokemonListPreview(page, pageSize).then(pokemons => {
             setPokemonList(pokemons);
         });
     }, [page, pageSize]);
 
-    const onClickPokemon = (pokemon: Pokemon) => {
+    const onClickPokemon = (pokemon: PokemonPreview) => {
         detailsRef.current?.openDialog(pokemon);
     };
 
