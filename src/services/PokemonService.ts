@@ -1,9 +1,10 @@
 import Constants from "../Constants";
-import type { Pokemon } from "../models/Pokemon";
+import type { Pokemon, PokemonPreview } from "../models/Pokemon";
 
 export default class PokemonService {
     private static readonly cachedPokemons: Map<number, Pokemon> = new Map();
     private static readonly cachedImages: Set<string> = new Set();
+    private static readonly PokemonPreviewCache: PokemonPreview[] = [];
 
     static async findPokemonList(page: number, pageSize: number): Promise<Pokemon[]> {
         this.clearCache();
@@ -11,6 +12,17 @@ export default class PokemonService {
         return promises
             .filter(result => result.status === 'fulfilled')
             .map(result => (result as PromiseFulfilledResult<Pokemon>).value);
+    }
+
+    static async getPokemonListPreview(page: number, pageSize: number): Promise<PokemonPreview[]> {
+        const startId = (page - 1) * pageSize + 1;
+        const endId = page * pageSize;
+
+        if (this.PokemonPreviewCache.length > 0) {
+            return this.PokemonPreviewCache.slice(startId - 1, endId);
+        }
+
+        return this.fetchPokemonListPreview(startId, endId);
     }
 
     static async findPokemon(id: number): Promise<Pokemon> {
@@ -50,6 +62,16 @@ export default class PokemonService {
                 image.src = data.sprites.other?.["official-artwork"]?.front_default || ""
             );
         }
+    }
+
+    static async fetchPokemonListPreview(startId: number, endId: number): Promise<PokemonPreview[]> {
+        const response = await fetch(
+            `${Constants.API}/pokemonlist`,
+        );
+
+        const data: PokemonPreview[] = await response.json();
+        this.PokemonPreviewCache.push(...data);
+        return data.slice(startId - 1, endId);
     }
 
     private static clearCache(): void {
