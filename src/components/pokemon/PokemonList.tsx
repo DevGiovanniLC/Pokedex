@@ -15,7 +15,7 @@ export default function PokemonList({ page, pageSize }: PokemonListProps) {
     const detailsRef = useRef<PokemonDetailsHandle>(null);
 
     useEffect(() => {
-        PokemonService.loadPokemons(page, pageSize).then(pokemons => {
+        PokemonService.findPokemonList(page, pageSize).then(pokemons => {
             setPokemonList(pokemons);
         });
     }, [page, pageSize]);

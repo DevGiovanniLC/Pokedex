@@ -17,7 +17,7 @@ export default function DetailedPokemon() {
     useEffect(() => {
         if (!isValidId || !pokemonId) return;
 
-        PokemonService.fetchPokemon(Number(pokemonId)).then((data) => {
+        PokemonService.findPokemon(Number(pokemonId)).then((data) => {
             setPokemon(data);
             setError(false);
         }).catch(() => {
