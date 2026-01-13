@@ -160,3 +160,15 @@ export interface Pokemon {
     stats: PokemonStat[];
     types: PokemonType[];
 }
+
+export interface PokemonPreview {
+    id: number,
+    name: string,
+    height: number,
+    weight: number,
+    base_experience: number,
+    sprite_front: string,
+    sprite_artwork: string,
+    type_primary: string,
+    type_secondary: string,
+}
