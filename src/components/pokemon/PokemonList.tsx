@@ -15,6 +15,7 @@ export default function PokemonList({ pokemonName }: PokemonListProps) {
     const [pokemonRows, setPokemonRows] = useState<PokemonPreview[][]>([]);
     const detailsRef = useRef<PokemonDetailsHandle>(null);
     const ITEMS_PER_ROW = 5;
+    const [errorText, setErrorText] = useState<string>("Pokemon no encontrado.");
 
     useEffect(() => {
         PokemonService.getPokemonListPreviewFilterBy(pokemonName).then(async pokemons => {
@@ -24,6 +25,10 @@ export default function PokemonList({ pokemonName }: PokemonListProps) {
                 (_, i) => pokemons.slice(i * ITEMS_PER_ROW, i * ITEMS_PER_ROW + ITEMS_PER_ROW)
             );
             setPokemonRows(rows);
+        }).catch(error => {
+            console.error("Error fetching Pokémon list:", error);
+            setPokemonRows([]);
+            setErrorText("Error obteniendo datos de los Pokémon. Por favor, inténtalo de nuevo más tarde.");
         });
     }, [pokemonName]);
 
@@ -31,12 +36,7 @@ export default function PokemonList({ pokemonName }: PokemonListProps) {
         detailsRef.current?.openDialog(pokemon);
     };
 
-    if (pokemonRows.length === 0) return (
-        <div className="pokemon-list-container">
-            <p>No hay Pokemons disponibles.</p>
-            <p>Vuelva en otro momento.</p>
-        </div>
-    )
+    if (pokemonRows.length === 0) return (<p id="error-text">{errorText}</p>)
 
     return (
         <>

@@ -9,3 +9,10 @@
     justify-content: center;
     flex-wrap: wrap;
 }
+
+#error-text {
+    color: #f87171;
+    font-size: 18px;
+    text-align: center;
+    margin-top: 40px;
+}
