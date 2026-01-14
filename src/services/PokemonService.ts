@@ -7,7 +7,12 @@ export default class PokemonService {
     static async getPokemonListPreviewFilterBy(pokemonName: string): Promise<PokemonPreview[]> {
         const pokemons = await this.getPokemonListPreview();
         if (!pokemonName || pokemonName.trim() === '') return pokemons;
-        return pokemons.filter(pokemon => pokemon.name.toLowerCase().includes(pokemonName.toLowerCase()));
+        const id = Number(pokemonName);
+        if (!isNaN(id)) {
+            return pokemons.filter(pokemon => String(pokemon.id).startsWith(pokemonName));
+        } else {
+            return pokemons.filter(pokemon => pokemon.name.toLowerCase().includes(pokemonName.toLowerCase()));
+        }
     }
 
     private static async getPokemonListPreview(): Promise<PokemonPreview[]> {
