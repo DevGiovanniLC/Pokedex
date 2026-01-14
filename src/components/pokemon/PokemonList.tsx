@@ -7,33 +7,32 @@ import PokemonService from "../../services/PokemonService";
 import { type RowComponentProps, List } from 'react-window';
 
 
+const ITEMS_PER_ROW = 6;
+
 interface PokemonListProps {
     pokemonName: string;
     pokemonType: string;
 }
 
 export default function PokemonList({ pokemonName, pokemonType }: PokemonListProps) {
+    const [errorText, setErrorText] = useState<string>("Pokemon no encontrado.");
     const [pokemonRows, setPokemonRows] = useState<PokemonPreview[][]>([]);
     const detailsRef = useRef<PokemonDetailsHandle>(null);
-    const ITEMS_PER_ROW = 6;
-    const [errorText, setErrorText] = useState<string>("Pokemon no encontrado.");
 
     useEffect(() => {
         PokemonService.getPokemonListPreviewFilterBy(pokemonName, pokemonType).then(async pokemons => {
-
             const rows = Array.from(
                 { length: Math.ceil(pokemons.length / ITEMS_PER_ROW) },
                 (_, i) => pokemons.slice(i * ITEMS_PER_ROW, i * ITEMS_PER_ROW + ITEMS_PER_ROW)
             );
             setPokemonRows(rows);
-        }).catch(error => {
-            console.error("Error fetching Pokémon list:", error);
+        }).catch(() => {
             setPokemonRows([]);
             setErrorText("Error obteniendo datos de los Pokémon. Por favor, inténtalo de nuevo más tarde.");
         });
     }, [pokemonName, pokemonType]);
 
-    const onClickPokemon = (pokemon: PokemonPreview) => {
+    const openDialog = (pokemon: PokemonPreview) => {
         detailsRef.current?.openDialog(pokemon);
     };
 
@@ -46,7 +45,7 @@ export default function PokemonList({ pokemonName, pokemonType }: PokemonListPro
                 rowCount={pokemonRows.length}
                 rowHeight={260}
                 rowComponent={Row}
-                rowProps={{ pokemon: pokemonRows, onClickPokemon }}
+                rowProps={{ pokemon: pokemonRows, onClickPokemon: openDialog }}
             />
             <PokemonDetails ref={detailsRef} />
         </>
@@ -61,8 +60,7 @@ function Row({ index, style, pokemon, onClickPokemon }: RowComponentProps<{ poke
                     pokemon={pokemon}
                     onClick={() => onClickPokemon(pokemon)}
                 />
-            ))
-            }
+            ))}
         </div>
     )
 }
