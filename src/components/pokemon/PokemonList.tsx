@@ -4,27 +4,34 @@ import PokemonCard from "./PokemonCard";
 import PokemonDetails, { type PokemonDetailsHandle } from "./PokemonDetails";
 import type { PokemonPreview } from "../../models/Pokemon";
 import PokemonService from "../../services/PokemonService";
+import { type RowComponentProps, List } from 'react-window';
+
 
 interface PokemonListProps {
-    page: number;
-    pageSize: number;
+    pokemonName: string;
 }
 
-export default function PokemonList({ page, pageSize }: PokemonListProps) {
-    const [pokemonList, setPokemonList] = useState<PokemonPreview[]>([]);
+export default function PokemonList({ pokemonName }: PokemonListProps) {
+    const [pokemonRows, setPokemonRows] = useState<PokemonPreview[][]>([]);
     const detailsRef = useRef<PokemonDetailsHandle>(null);
+    const ITEMS_PER_ROW = 5;
 
     useEffect(() => {
-        PokemonService.getPokemonListPreview(page, pageSize).then(pokemons => {
-            setPokemonList(pokemons);
+        PokemonService.getPokemonListPreviewFilterBy(pokemonName).then(async pokemons => {
+
+            const rows = Array.from(
+                { length: Math.ceil(pokemons.length / ITEMS_PER_ROW) },
+                (_, i) => pokemons.slice(i * ITEMS_PER_ROW, i * ITEMS_PER_ROW + ITEMS_PER_ROW)
+            );
+            setPokemonRows(rows);
         });
-    }, [page, pageSize]);
+    }, [pokemonName]);
 
     const onClickPokemon = (pokemon: PokemonPreview) => {
         detailsRef.current?.openDialog(pokemon);
     };
 
-    if (pokemonList.length === 0) return (
+    if (pokemonRows.length === 0) return (
         <div className="pokemon-list-container">
             <p>No hay Pokemons disponibles.</p>
             <p>Vuelva en otro momento.</p>
@@ -32,18 +39,29 @@ export default function PokemonList({ page, pageSize }: PokemonListProps) {
     )
 
     return (
-        <div className="pokemon-list-container">
-            <ul className="pokemon-list">
-                {pokemonList.map((pokemon) => (
-                    <li key={pokemon.id}>
-                        <PokemonCard
-                            pokemon={pokemon}
-                            onClick={() => onClickPokemon(pokemon)}
-                        />
-                    </li>
-                ))}
-            </ul>
+        <>
+            <List
+                id="pokemon-virtual-list"
+                rowCount={pokemonRows.length}
+                rowHeight={260}
+                rowComponent={Row}
+                rowProps={{ pokemon: pokemonRows, onClickPokemon }}
+            />
             <PokemonDetails ref={detailsRef} />
-        </div>
+        </>
     );
+}
+
+function Row({ index, style, pokemon, onClickPokemon }: RowComponentProps<{ pokemon: PokemonPreview[][], onClickPokemon: (pokemon: PokemonPreview) => void }>) {
+    return (
+        <div id="row-list" style={style} key={index}>
+            {pokemon[index].map((pokemon) => (
+                <PokemonCard
+                    pokemon={pokemon}
+                    onClick={() => onClickPokemon(pokemon)}
+                />
+            ))
+            }
+        </div>
+    )
 }

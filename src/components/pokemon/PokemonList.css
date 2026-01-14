@@ -1,24 +1,11 @@
-.pokemon-list-container {
+#pokemon-virtual-list {
+    height: 65vh;
+    padding-top: 20px;
+}
+
+#row-list {
     display: flex;
+    gap: 25px;
     justify-content: center;
-    min-height: 70vh;
-    width: 100%;
-    padding: 20px 0;
-}
-
-.pokemon-list {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-    list-style-type: none;
-    padding: 20px;
-    gap: 20px;
-    height: fit-content;
-    width: 100%;
-    max-width: 1400px;
-}
-
-.pokemon-list li {
-    margin: 0;
-    padding: 0;
-    height: fit-content;
+    flex-wrap: wrap;
 }
