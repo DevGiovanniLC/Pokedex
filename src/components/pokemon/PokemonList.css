@@ -5,9 +5,8 @@
 
 #row-list {
     display: flex;
-    gap: 25px;
+    gap: 1%;
     justify-content: center;
-    flex-wrap: wrap;
 }
 
 #error-text {

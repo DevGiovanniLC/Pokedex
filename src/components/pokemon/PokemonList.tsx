@@ -14,7 +14,7 @@ interface PokemonListProps {
 export default function PokemonList({ pokemonName }: PokemonListProps) {
     const [pokemonRows, setPokemonRows] = useState<PokemonPreview[][]>([]);
     const detailsRef = useRef<PokemonDetailsHandle>(null);
-    const ITEMS_PER_ROW = 5;
+    const ITEMS_PER_ROW = 6;
     const [errorText, setErrorText] = useState<string>("Pokemon no encontrado.");
 
     useEffect(() => {
