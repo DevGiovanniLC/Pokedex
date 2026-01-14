@@ -4,15 +4,32 @@ import type { Pokemon, PokemonPreview } from "../models/Pokemon";
 export default class PokemonService {
     private static readonly PokemonPreviewCache: PokemonPreview[] = [];
 
-    static async getPokemonListPreviewFilterBy(pokemonName: string): Promise<PokemonPreview[]> {
+    static async getPokemonListPreviewFilterBy(pokemonName: string, pokemonType: string): Promise<PokemonPreview[]> {
         const pokemons = await this.getPokemonListPreview();
+        const filteredByName = await this.getPokemonListPreviewFilterByName(pokemons, pokemonName);
+        const filteredByType = await this.getPokemonListPreviewFilterByType(filteredByName, pokemonType);
+        
+        return filteredByType;
+    }
+
+    private static async getPokemonListPreviewFilterByName(pokemons: PokemonPreview[], pokemonName: string): Promise<PokemonPreview[]> {
         if (!pokemonName || pokemonName.trim() === '') return pokemons;
         const id = Number(pokemonName);
-        if (!isNaN(id)) {
-            return pokemons.filter(pokemon => String(pokemon.id).startsWith(pokemonName));
-        } else {
-            return pokemons.filter(pokemon => pokemon.name.toLowerCase().includes(pokemonName.toLowerCase()));
-        }
+
+        if (!isNaN(id)) return pokemons
+            .filter(pokemon => String(pokemon.id).startsWith(pokemonName));
+
+        return pokemons.filter(pokemon => pokemon.name.toLowerCase().includes(pokemonName.toLowerCase()));
+
+    }
+
+
+    private static async getPokemonListPreviewFilterByType(pokemons: PokemonPreview[], pokemonType: string): Promise<PokemonPreview[]> {
+        if (!pokemonType || pokemonType.trim() === '') return pokemons;
+        return pokemons.filter(pokemon => (
+            pokemon.type_primary.includes(pokemonType) ||
+            pokemon.type_secondary?.includes(pokemonType)
+        ));
     }
 
     private static async getPokemonListPreview(): Promise<PokemonPreview[]> {

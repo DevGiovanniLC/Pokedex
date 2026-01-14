@@ -9,16 +9,17 @@ import { type RowComponentProps, List } from 'react-window';
 
 interface PokemonListProps {
     pokemonName: string;
+    pokemonType: string;
 }
 
-export default function PokemonList({ pokemonName }: PokemonListProps) {
+export default function PokemonList({ pokemonName, pokemonType }: PokemonListProps) {
     const [pokemonRows, setPokemonRows] = useState<PokemonPreview[][]>([]);
     const detailsRef = useRef<PokemonDetailsHandle>(null);
     const ITEMS_PER_ROW = 6;
     const [errorText, setErrorText] = useState<string>("Pokemon no encontrado.");
 
     useEffect(() => {
-        PokemonService.getPokemonListPreviewFilterBy(pokemonName).then(async pokemons => {
+        PokemonService.getPokemonListPreviewFilterBy(pokemonName, pokemonType).then(async pokemons => {
 
             const rows = Array.from(
                 { length: Math.ceil(pokemons.length / ITEMS_PER_ROW) },
@@ -30,7 +31,7 @@ export default function PokemonList({ pokemonName }: PokemonListProps) {
             setPokemonRows([]);
             setErrorText("Error obteniendo datos de los Pokémon. Por favor, inténtalo de nuevo más tarde.");
         });
-    }, [pokemonName]);
+    }, [pokemonName, pokemonType]);
 
     const onClickPokemon = (pokemon: PokemonPreview) => {
         detailsRef.current?.openDialog(pokemon);
