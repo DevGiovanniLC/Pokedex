@@ -57,13 +57,14 @@ export default function PokemonList(filter: PokemonListProps) {
 
 function Row({ index, style, pokemon, onClickPokemon }: RowComponentProps<{ pokemon: PokemonPreview[][], onClickPokemon: (pokemon: PokemonPreview) => void }>) {
     return (
-        <div id="row-list" style={style} key={index}>
+        <li id="row-list" style={style} key={index}>
             {pokemon[index].map((pokemon) => (
                 <PokemonCard
+                    key={pokemon.id}
                     pokemon={pokemon}
                     onClick={() => onClickPokemon(pokemon)}
                 />
             ))}
-        </div>
+        </li>
     )
 }

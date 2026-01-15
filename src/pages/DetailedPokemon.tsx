@@ -53,8 +53,8 @@ export default function DetailedPokemon() {
     return (
         <div className={`pokemon-detail type-${primaryType}`}>
             <div className="nav-header">
-                <button 
-                    className="nav-button previous-button" 
+                <button
+                    className="nav-button previous-button"
                     onClick={() => navigate(`/pokedex/${currentId - 1}`)}
                     disabled={!hasPrevious}
                 >
@@ -64,9 +64,9 @@ export default function DetailedPokemon() {
                 <Link to="/pokedex" className="nav-button back-to-pokedex">
                     Volver al Pokedex
                 </Link>
-                
-                <button 
-                    className="nav-button next-button" 
+
+                <button
+                    className="nav-button next-button"
                     onClick={() => navigate(`/pokedex/${currentId + 1}`)}
                     disabled={!hasNext}
                 >
@@ -81,9 +81,9 @@ export default function DetailedPokemon() {
 
             <div className="pokemon-image-container">
                 {officialArtwork && (
-                    <img 
-                        src={officialArtwork} 
-                        alt={pokemon.name} 
+                    <img
+                        src={officialArtwork}
+                        alt={pokemon.name}
                         className="pokemon-artwork"
                     />
                 )}
@@ -102,7 +102,7 @@ export default function DetailedPokemon() {
                     )}
                 </div>
             </div>
-            
+
             <div className="pokemon-types">
                 {pokemon.types.map((t) => (
                     <span key={t.slot} className={`type-badge type-${t.type.name}`}>
@@ -139,7 +139,7 @@ export default function DetailedPokemon() {
                             <span className="stat-name">{formatStatName(stat.stat.name)}</span>
                             <span className="stat-value">{stat.base_stat}</span>
                             <div className="stat-bar-container">
-                                <div 
+                                <div
                                     className={`stat-bar ${stat.stat.name}`}
                                     style={{ width: `${(stat.base_stat / maxStat) * 100}%` }}
                                 />
@@ -161,8 +161,8 @@ export default function DetailedPokemon() {
                 <h2 className="section-title">⚡ Habilidades</h2>
                 <div className="abilities-grid">
                     {pokemon.abilities.map((ability) => (
-                        <div 
-                            key={ability.slot} 
+                        <div
+                            key={ability.slot}
                             className={`ability-card ${ability.is_hidden ? 'hidden' : ''}`}
                         >
                             <span className="ability-name">
@@ -276,7 +276,6 @@ function checkPokemonId(pokemonId: string | undefined): boolean {
     if (!pokemonId) return false
 
     const id = Number(pokemonId)
-    console.log("Valid pokemon ID:", id)
     if (isNaN(id) || id <= 0) return false
 
     return true

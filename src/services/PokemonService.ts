@@ -52,7 +52,6 @@ export default class PokemonService {
             `${Constants.API}/pokemonlist?order=${order}`,
         );
 
-        console.log(order);
         const data: PokemonPreview[] = await response.json();
         this.PokemonPreviewCache.length = 0;
         this.PokemonPreviewCache.push(...data);

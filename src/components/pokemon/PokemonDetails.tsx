@@ -36,7 +36,7 @@ const PokemonDetails = forwardRef<PokemonDetailsHandle>((_, ref) => {
                     </div>
 
                     <div className="pokemon-images">
-                        <img className="official-artwork" src={pokemon?.sprite_artwork ?? ''} alt={pokemon?.name} loading="lazy" />
+                        <img className="official-artwork" src={pokemon?.sprite_artwork} alt={pokemon?.name} loading="lazy" />
                     </div>
 
                     <div className="pokemon-types">
