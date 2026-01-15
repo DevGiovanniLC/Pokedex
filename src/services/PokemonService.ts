@@ -3,12 +3,13 @@ import type { Pokemon, PokemonPreview } from "../models/Pokemon";
 
 export default class PokemonService {
     private static readonly PokemonPreviewCache: PokemonPreview[] = [];
+    private static lastOrder: string = '';
 
-    static async getPokemonListPreviewFilterBy(pokemonName: string, pokemonType: string): Promise<PokemonPreview[]> {
-        const pokemons = await this.getPokemonListPreview();
+    static async getPokemonListPreviewFilterBy(pokemonName: string, pokemonType: string, order: string): Promise<PokemonPreview[]> {
+        const pokemons = await this.getPokemonListPreview(order);
         const filteredByName = await this.getPokemonListPreviewFilterByName(pokemons, pokemonName);
         const filteredByType = await this.getPokemonListPreviewFilterByType(filteredByName, pokemonType);
-        
+
         return filteredByType;
     }
 
@@ -32,11 +33,13 @@ export default class PokemonService {
         ));
     }
 
-    private static async getPokemonListPreview(): Promise<PokemonPreview[]> {
-        if (this.PokemonPreviewCache.length > 0) {
+    private static async getPokemonListPreview(order: string): Promise<PokemonPreview[]> {
+        if (this.PokemonPreviewCache.length > 0 && this.lastOrder === order) {
             return this.PokemonPreviewCache;
         }
-        return this.fetchPokemonListPreview();
+
+        this.lastOrder = order;
+        return this.fetchPokemonListPreview(order);
     }
 
     static async findPokemon(id: number): Promise<Pokemon> {
@@ -44,12 +47,14 @@ export default class PokemonService {
         return data;
     }
 
-    static async fetchPokemonListPreview(): Promise<PokemonPreview[]> {
+    static async fetchPokemonListPreview(order: string): Promise<PokemonPreview[]> {
         const response = await fetch(
-            `${Constants.API}/pokemonlist`,
+            `${Constants.API}/pokemonlist?order=${order}`,
         );
 
+        console.log(order);
         const data: PokemonPreview[] = await response.json();
+        this.PokemonPreviewCache.length = 0;
         this.PokemonPreviewCache.push(...data);
         return this.PokemonPreviewCache;
     }

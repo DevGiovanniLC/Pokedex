@@ -12,15 +12,18 @@ const ITEMS_PER_ROW = 6;
 interface PokemonListProps {
     pokemonName: string;
     pokemonType: string;
+    order: string;
 }
 
-export default function PokemonList({ pokemonName, pokemonType }: PokemonListProps) {
+export default function PokemonList(filter: PokemonListProps) {
+
+    const { pokemonName, pokemonType, order } = filter;
     const [errorText, setErrorText] = useState<string>("Pokemon no encontrado.");
     const [pokemonRows, setPokemonRows] = useState<PokemonPreview[][]>([]);
     const detailsRef = useRef<PokemonDetailsHandle>(null);
 
     useEffect(() => {
-        PokemonService.getPokemonListPreviewFilterBy(pokemonName, pokemonType).then(async pokemons => {
+        PokemonService.getPokemonListPreviewFilterBy(pokemonName, pokemonType, order).then(async pokemons => {
             const rows = Array.from(
                 { length: Math.ceil(pokemons.length / ITEMS_PER_ROW) },
                 (_, i) => pokemons.slice(i * ITEMS_PER_ROW, i * ITEMS_PER_ROW + ITEMS_PER_ROW)
@@ -30,7 +33,7 @@ export default function PokemonList({ pokemonName, pokemonType }: PokemonListPro
             setPokemonRows([]);
             setErrorText("Error obteniendo datos de los Pokémon. Por favor, inténtalo de nuevo más tarde.");
         });
-    }, [pokemonName, pokemonType]);
+    }, [pokemonName, pokemonType, order]);
 
     const openDialog = (pokemon: PokemonPreview) => {
         detailsRef.current?.openDialog(pokemon);
